@@ -1,6 +1,6 @@
 <?php
 // Establish a connection to the database
-require_once dirname(__DIR__, 2) . '/data/connect.php';
+require_once dirname(__DIR__, 3) . '/data/connect.php';
 $conn = db_connect();
 
 ?>
