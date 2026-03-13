@@ -3,17 +3,7 @@
 // This is being included as a separate file because there are a few places throughout the website where we may want to spit out a card with a country's information on it. This is all part of refactoring our code and making it modular / more maintainable. 
 
 // Let's start by creating an array with all of the names of the continents instead of an integer.
-
-$continents = array(
-    1 => "Latin America",
-    2 => "North America &amp; Oceania",
-    3 => "Western Europe",
-    4 => "Middle East",
-    5 => "Africa",
-    6 => "South Asia",
-    7 => "Eastern Europe &amp; Central Asia",
-    8 => "East Asia"
-);
+include "continents.php";
 
 // Let's 'translate' the integer to the continent's actual name.
 $continent = $continents[$row['continent']];
