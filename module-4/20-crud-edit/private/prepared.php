@@ -18,14 +18,16 @@
 */
 
 
-function get_all_cities() {
+function get_all_cities()
+{
     $query = "SELECT * FROM cities";
     $result = execute_prepared_statement($query);
 
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
-function execute_prepared_statement($query, $parameters = [], $types = "") {
+function execute_prepared_statement($query, $parameters = [], $types = "")
+{
     global $connection;
 
     $statement = $connection->prepare($query);
@@ -49,4 +51,35 @@ function execute_prepared_statement($query, $parameters = [], $types = "") {
 
     return true;
 }
-?>
+
+function insert_city($city_name, $province, $population, $capital, $trivia)
+{
+    $query = "INSERT INTO cities (city_name, province, population, is_capital, trivia) VALUES (?,?,?,?,?)";
+    return execute_prepared_statement($query, [$city_name, $province, $population, $capital, $trivia], "ssiis");
+}
+
+function delete_city($id)
+{
+    $query = "DELETE FROM cities WHERE cid = ?";
+    return execute_prepared_statement($query, [$id], "i");
+}
+
+function select_city_by_id($id)
+{
+    $query = "SELECT * FROM cities WHERE cid = ?";
+    $result = execute_prepared_statement($query, [$id], "i");
+    return $result->fetch_assoc();
+}
+
+function update_city($city_name, $province, $population, $capital, $trivia, $id)
+{
+    $query = "UPDATE cities SET
+        city_name = ?,
+        province = ?,
+        population = ?,
+        is_capital = ?,
+        trivia = ?,
+        WHERE cid = ?";
+
+    return execute_prepared_statement($query, [$city_name, $province, $population, $capital, $trivia, $id], "ssiisi");
+}

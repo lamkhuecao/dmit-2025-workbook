@@ -49,4 +49,11 @@ function execute_prepared_statement($query, $parameters = [], $types = "") {
 
     return true;
 }
+
+function insert_city($city_name, $province, $population, $capital, $trivia) {
+
+    $query = "INSERT INTO cities (city_name, province, population, is_capital, trivia) VALUES (?,?,?,?,?)";
+
+    return execute_prepared_statement($query, [$city_name, $province, $population, $capital, $trivia], "ssiis");
+}
 ?>
